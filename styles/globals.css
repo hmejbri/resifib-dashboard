@@ -14,3 +14,30 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.imageProduit:hover {
+  transition: all 0.6s;
+  transform: scale(1.04);
+  filter: opacity(0.5) drop-shadow(0 0 0 rgb(0, 0, 0));
+}
+
+/* Container needed to position the button. Adjust the width as needed */
+.container {
+  position: relative;
+  width: 100%;
+}
+
+/* Style the button and place it in the middle of the container/image */
+.container .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}

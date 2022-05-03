@@ -53,7 +53,7 @@ export default function Ajouter({ token }) {
 	};
 
 	const [produitsCode, setProduitsCode] = useState([
-		<FormAjouter index={0} data={[{ images: [] }]} onChangeProduit={onChangeProduit} />,
+		<FormAjouter index={0} data={[{ images: [] }]} onChangeProduit={onChangeProduit} key={0} />,
 	]);
 
 	const autreProduit = () => {

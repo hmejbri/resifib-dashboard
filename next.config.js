@@ -2,10 +2,10 @@
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		domains: ["localhost"],
+		domains: ["res.cloudinary.com"],
 	},
 	env: {
-		API: "http://localhost:3001/api/",
+		API: "https://resifib-dashboard.herokuapp.com/api/",
 	},
 };
 

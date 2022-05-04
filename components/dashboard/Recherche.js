@@ -6,7 +6,7 @@ export default function Recherche({ data, recherche }) {
 		const T = [];
 
 		data.map((val) => {
-			if (val.nom.toLowerCase().indexOf(text.toLowerCase()) > -1) T.push(val);
+			if (val) if (val.nom.toLowerCase().indexOf(text.toLowerCase()) > -1) T.push(val);
 		});
 
 		recherche(T);

@@ -34,7 +34,6 @@ export default function Login() {
 			});
 			window.location.href = "/";
 		} else {
-			console.log("here");
 			setErreur(true);
 		}
 	};

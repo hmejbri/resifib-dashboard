@@ -33,7 +33,8 @@ export async function getServerSideProps(ctx) {
 			},
 		});
 
-		const data = await response2.json();
+		var data = await response2.json();
+		if (data[0] == null) data = [];
 
 		return {
 			props: {

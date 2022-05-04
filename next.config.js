@@ -6,6 +6,7 @@ const nextConfig = {
 	},
 	env: {
 		API: "https://resifib-dashboard.herokuapp.com/api/",
+		/* API: "http://localhost:3001/api/", */
 	},
 };
 

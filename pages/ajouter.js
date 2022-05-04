@@ -47,7 +47,6 @@ export default function Ajouter({ token }) {
 	const onChangeProduit = (index, data) => {
 		var T = produitsData;
 		T[index] = data;
-		console.log(T);
 		setProduitsData(T);
 		return 0;
 	};

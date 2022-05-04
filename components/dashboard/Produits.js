@@ -34,20 +34,22 @@ export default function Produits({ data, token }) {
 	};
 
 	const supprimer = async () => {
-		const data = await JSON.stringify(selected);
+		if (selected[0] !== "") {
+			const data = await JSON.stringify(selected);
 
-		const response = await fetch(process.env.API + "supprimerProduits", {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-				"auth-token": token,
-			},
-			body: data,
-		});
+			const response = await fetch(process.env.API + "supprimerProduits", {
+				method: "PUT",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					"auth-token": token,
+				},
+				body: data,
+			});
 
-		if (response.ok) location.reload();
-		else console.log(response);
+			if (response.ok) location.reload();
+			else console.log(response);
+		}
 	};
 
 	return (
@@ -83,7 +85,7 @@ export default function Produits({ data, token }) {
 						<Modifier
 							open={open}
 							handleClose={handleClose}
-							data={data.filter((val) => val.id == selected[0])}
+							data={data[0] ? data.filter((val) => val.id == selected[0]) : ""}
 							token={token}
 						/>
 					</div>
@@ -92,30 +94,27 @@ export default function Produits({ data, token }) {
 				)}
 
 				<DataGrid
-					rows={data.map((val) =>
-						val
-							? {
-									id: val.id,
-									Nom: val.nom,
-									Categorie: val.categorie,
-									Description: val.description,
-									"Date de création":
-										new Date(val.date_creation).toLocaleDateString() +
-										" " +
-										new Date(val.date_creation).toLocaleTimeString(),
-									"Date de modification":
-										new Date(val.date_modification).toLocaleDateString() +
-										" " +
-										new Date(val.date_modification).toLocaleTimeString(),
-							  }
-							: {
-									id: "",
-									Description: "Aucune résultat",
-							  }
-					)}
+					rows={data.map((val) => ({
+						id: val.id,
+						Nom: val.nom,
+						Categorie: val.categorie,
+						Description: val.description,
+						"Date de création":
+							new Date(val.date_creation).toLocaleDateString() +
+							" " +
+							new Date(val.date_creation).toLocaleTimeString(),
+						"Date de modification":
+							new Date(val.date_modification).toLocaleDateString() +
+							" " +
+							new Date(val.date_modification).toLocaleTimeString(),
+					}))}
+					components={{
+						NoRowsOverlay: () => <p>Aucun produit.</p>,
+						NoResultsOverlay: () => <p>Aucun produit.</p>,
+					}}
 					columns={columns}
-					pageSize={10}
-					rowsPerPageOptions={[10]}
+					pageSize={20}
+					rowsPerPageOptions={[20]}
 					checkboxSelection
 					onSelectionModelChange={(newSelection) => {
 						setSelected(newSelection);

@@ -71,10 +71,11 @@ export default function Ajouter({ token }) {
 		setProduitsData((produitsData) => [...produitsData, {}]);
 	};
 
-	const submit = async () => {
+	const submit = async (e) => {
+		e.preventDefault();
 		const data = await JSON.stringify(produitsData);
 
-		await fetch(process.env.API + "ajouterProduits", {
+		const res = await fetch(process.env.API + "ajouterProduits", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -83,6 +84,8 @@ export default function Ajouter({ token }) {
 			},
 			body: data,
 		});
+
+		if (res.ok) location.reload();
 	};
 
 	return (

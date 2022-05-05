@@ -1,9 +1,29 @@
 import { Grid, Container, TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useEffect, useState } from "react";
 
 import Upload from "./Upload";
 
 export default function FormAjouter({ index, data, onChangeProduit }) {
+	const [categories, setCategories] = useState([]);
+
+	useEffect(() => {
+		const _fetch = async () => {
+			const response = await fetch(process.env.API + "categories", {
+				method: "get",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+			});
+
+			const result = await response.json();
+			setCategories(result);
+		};
+
+		_fetch();
+	}, []);
+
 	const onChangeNom = (value) => {
 		var tmp = data[index];
 		tmp.nom = value;
@@ -55,9 +75,8 @@ export default function FormAjouter({ index, data, onChangeProduit }) {
 				</Grid>
 				<Grid item xs={6}>
 					<Autocomplete
-						id="free-solo-demo"
 						freeSolo
-						options={["test1", "test2"]}
+						options={categories}
 						renderInput={(params) => (
 							<TextField {...params} label="Catégorie" required />
 						)}
